@@ -13,10 +13,8 @@ class CalculatorTest {
             int result = calculator.calculateFromFile("resources/Numbers.dat");
             int expected = 31;
             assertEquals(expected, result);
-        } catch (IOException e) {
+        } catch (NumberFormatException | IOException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            System.out.println(e.getMessage());
         }
     }
 }

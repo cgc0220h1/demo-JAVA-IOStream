@@ -6,7 +6,12 @@ public class Calculator {
 
     public int calculateFromFile(String pathName) throws IOException {
         int total = 0;
-        FileReader fileReader = new FileReader(pathName);
+        File file = new File(pathName);
+        if (!file.exists()) {
+            throw new FileNotFoundException();
+        }
+
+        FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String lines;
         while ((lines = bufferedReader.readLine()) != null) {
@@ -14,6 +19,7 @@ public class Calculator {
             total += number;
         }
         bufferedReader.close();
+
         return total;
     }
 
