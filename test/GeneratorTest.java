@@ -13,7 +13,7 @@ class GeneratorTest {
         File directory = new File("resources");
         directory.mkdir();
         try {
-            generator.randomNumber("resources/Numbers.dat",5,10);
+            generator.randomNumber("resources/Numbers.dat",5,10,false);
         } catch (IOException e) {
             e.printStackTrace();
         }

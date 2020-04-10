@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
@@ -22,14 +23,23 @@ public class CalculatorMain {
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
+                    System.out.print("Nhập số lượng số random: ");
+                    int number = scanner.nextInt();
+                    System.out.print("Nhập khoảng random: ");
+                    int range = scanner.nextInt();
                     try {
-                        System.out.print("Nhập số lượng số random: ");
-                        int number = scanner.nextInt();
-                        System.out.print("Nhập khoảng random: ");
-                        int range = scanner.nextInt();
-                        generator.randomNumber(path, number, range);
+                        generator.randomNumber(path, number, range,false);
                     } catch (FileAlreadyExistsException e) {
                         System.out.println("File đã tồn tại");
+                        System.out.print("Ghi tiếp lên file đã có ? (yes/no): ");
+                        char confirm = scanner.next().toLowerCase().charAt(0);
+                        if (confirm == 'y') {
+                            try {
+                                generator.randomNumber(path,number,range,true);
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
