@@ -20,10 +20,8 @@ class IOTest {
             InputStreamReader webReader = new InputStreamReader(webStream);
             BufferedReader bufferedReader = new BufferedReader(webReader);
 
-            String line;
             while (bufferedReader.readLine() != null) {
-                line = bufferedReader.readLine();
-                System.out.println(line);
+                System.out.println(bufferedReader.readLine());
             }
             webReader.close();
 
@@ -100,7 +98,7 @@ class IOTest {
             printWriter.println("Đây là bản sao của Đức: \n" + anhNam);
             printWriter.close();
             File nam1 = new File("text/duc.dat");
-            FileWriter fileWriter = new FileWriter(nam);
+            FileWriter fileWriter = new FileWriter(nam1);
             fileWriter.write("Đây là bản sao của bản sao của Đức: \n" + anhNam.toString());
             fileWriter.close();
         } catch (IOException e) {
