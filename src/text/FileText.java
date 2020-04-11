@@ -41,7 +41,7 @@ public class FileText {
 
     public int countCharacter(String data) {
         int count = 0;
-        Pattern pattern = Pattern.compile("[^\\s\\n]");
+        Pattern pattern = Pattern.compile("[^\\s]");
         Matcher matcher = pattern.matcher(data);
         while (matcher.find()) {
             count++;
@@ -75,5 +75,29 @@ public class FileText {
             }
         }
         return count;
+    }
+
+    public String[][] readCSV(String path) throws IOException {
+        File csv = new File(path);
+        Scanner scanLine = new Scanner(csv);
+        Scanner countLine = new Scanner(csv);
+        String data;
+        int count = 0;
+        while (countLine.hasNextLine()) {
+            count++;
+            countLine.nextLine();
+        }
+        String[][] result = new String[count][];
+        count = 0;
+        while (scanLine.hasNext()) {
+            data = scanLine.nextLine();
+            String[] strings = data.split(",");
+            for (int index = 0; index<strings.length;index++) {
+                strings[index] = strings[index].replaceAll("\"","");
+            }
+            result[count] = strings;
+            count++;
+        }
+        return result;
     }
 }

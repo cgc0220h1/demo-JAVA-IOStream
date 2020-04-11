@@ -1,4 +1,4 @@
-import calculator.Calculator;
+import number.Calculator;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

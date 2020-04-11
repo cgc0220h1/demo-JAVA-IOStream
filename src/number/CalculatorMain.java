@@ -1,4 +1,4 @@
-package calculator;
+package number;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,27 +12,26 @@ public class CalculatorMain {
         Calculator calculator = new Calculator();
         int choice;
         boolean isExit = false;
-        System.out.print("Nhập đường dẫn file: ");
+        System.out.print("Enter Path: ");
         String path = scanner.nextLine();
 
         while (!isExit) {
             System.out.println("--------Menu--------");
-            System.out.println("1. Tạo file số random");
-            System.out.println("2. Tính tổng");
+            System.out.println("1. Generate File contains random number");
+            System.out.println("2. Calculate Total");
             System.out.println("0. Exit!");
-            System.out.print("Nhập lựa chọn: ");
+            System.out.print("Enter choice: ");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1:
-                    System.out.print("Nhập số lượng số random: ");
+                    System.out.print("Enter random numbers: ");
                     int number = scanner.nextInt();
-                    System.out.print("Nhập khoảng random: ");
+                    System.out.print("Enter random range: ");
                     int range = scanner.nextInt();
                     try {
                         generator.randomNumber(path, number, range,false);
                     } catch (FileAlreadyExistsException e) {
-                        System.out.println("File đã tồn tại");
-                        System.out.print("Ghi tiếp lên file đã có ? (yes/no): ");
+                        System.out.print("File Exist! Continue to write ? (yes/no): ");
                         char confirm = scanner.next().toLowerCase().charAt(0);
                         if (confirm == 'y') {
                             try {
@@ -48,9 +47,9 @@ public class CalculatorMain {
                 case 2:
                     try {
                         int result = calculator.calculateFromFile(path);
-                        System.out.println("Tổng bằng: " + result);
+                        System.out.println("Total: " + result);
                     } catch (FileNotFoundException e) {
-                        System.out.println("Không tìm thấy File");
+                        System.out.println("File Not Found!");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

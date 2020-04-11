@@ -14,9 +14,10 @@ public class FileTextMain {
         boolean isExit = false;
 
         while (!isExit) {
-            System.out.println("--------Menu--------");
+            System.out.println("\n--------Menu--------");
             System.out.println("1. Copy File");
             System.out.println("2. Count Character");
+            System.out.println("3. Display CSV");
             System.out.println("0. Exit Program!");
             System.out.print("Enter choice: ");
             choice = scanner.nextInt();
@@ -35,14 +36,14 @@ public class FileTextMain {
                         char confirm = scanner.next().toLowerCase().charAt(0);
                         if (confirm == 'y') {
                             File toDelete = new File(pathDest);
-                            if (toDelete.delete()) {
+                            if (!toDelete.exists()) {
+                                toDelete.delete();
                                 try {
                                     fileText.copyToFile(pathSource, pathDest);
                                 } catch (IOException exOther) {
                                     System.out.println("There has some error: " + exOther.getMessage());
                                 }
                             }
-
                         }
                     } catch (FileNotFoundException exNotFound) {
                         System.out.println("Source File Not Found!");
@@ -65,7 +66,7 @@ public class FileTextMain {
                             data = scanner.nextLine();
                             break;
                         case 2:
-                            System.out.print("Enter path: ");
+                            System.out.println("Enter path: ");
                             String path = scanner.nextLine();
                             try {
                                 data = fileText.readFile(path);
@@ -80,12 +81,31 @@ public class FileTextMain {
                     }
                     System.out.println("There is: " + fileText.countCharacter(data) + " characters");
                     break;
+                case 3:
+                    System.out.println("Enter CSV path: ");
+                    String path = scanner.nextLine();
+                    String[][] dataCSV;
+                    try {
+                        dataCSV = fileText.readCSV(path);
+                        System.out.println();
+                        for (String[] row : dataCSV) {
+                            for (String string : row) {
+                                System.out.printf("| %12s |", string);
+                            }
+                            System.out.println();
+                        }
+                    } catch (FileNotFoundException exNotFound) {
+                        System.out.println("File not Exist!");
+                    } catch (IOException exOther) {
+                        System.out.println("There has some error: " + exOther.getMessage());
+                    }
+                    break;
                 case 0:
                     System.out.println("Exit Program!");
                     isExit = true;
                     break;
                 default:
-                    System.out.println("Invalid Choice");
+                    System.out.println("Invalid Choice!");
             }
         }
     }

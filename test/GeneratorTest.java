@@ -1,4 +1,4 @@
-import calculator.Generator;
+import number.Generator;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

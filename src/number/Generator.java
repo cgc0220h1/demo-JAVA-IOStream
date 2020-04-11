@@ -1,4 +1,4 @@
-package calculator;
+package number;
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.Random;

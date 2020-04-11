@@ -84,4 +84,16 @@ class FileTextTest {
             ex.printStackTrace();
         }
     }
+
+    @Test
+    void readCSV() throws IOException {
+        FileText fileText = new FileText();
+        String[][] data = fileText.readCSV("text/country.csv");
+        for (String[] row : data) {
+            for(String string : row) {
+                System.out.printf("| %12s |",string);
+            }
+            System.out.println();
+        }
+    }
 }

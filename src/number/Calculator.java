@@ -1,4 +1,4 @@
-package calculator;
+package number;
 
 import java.io.*;
 
