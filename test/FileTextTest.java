@@ -96,4 +96,13 @@ class FileTextTest {
             System.out.println();
         }
     }
+
+    @DisplayName("Kiểm tra tốc độ copy file text sử dụng đọc ghi tuần tự")
+    @Test
+    void testCopyText() throws IOException {
+        FileText fileText = new FileText();
+        String pathSource = "text/random.txt";
+        String pathDest = "resources/random.txt";
+        fileText.copyToFile(pathSource,pathDest);
+    }
 }

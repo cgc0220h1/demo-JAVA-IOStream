@@ -35,8 +35,15 @@ public class FileText {
     }
 
     public void copyToFile(String pathSource, String pathDest) throws IOException {
-        String data = readFile(pathSource);
-        writeToFile(data,pathDest);
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(pathSource));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathDest));
+        String lines;
+        while ((lines = bufferedReader.readLine()) != null) {
+            bufferedWriter.write(lines);
+            bufferedWriter.newLine();
+        }
+        bufferedWriter.close();
+        bufferedReader.close();
     }
 
     public int countCharacter(String data) {
@@ -47,6 +54,30 @@ public class FileText {
             count++;
         }
         return count;
+    }
+
+    public String[][] readCSV(String path) throws IOException {
+        File csv = new File(path);
+        Scanner scanLine = new Scanner(csv);
+        Scanner countLine = new Scanner(csv);
+        String data;
+        int count = 0;
+        while (countLine.hasNextLine()) {
+            count++;
+            countLine.nextLine();
+        }
+        String[][] result = new String[count][];
+        count = 0;
+        while (scanLine.hasNext()) {
+            data = scanLine.nextLine();
+            String[] strings = data.split(",");
+            for (int index = 0; index<strings.length;index++) {
+                strings[index] = strings[index].replaceAll("\"","");
+            }
+            result[count] = strings;
+            count++;
+        }
+        return result;
     }
 
     public int countCharsUseFileReader(String path) throws IOException {
@@ -77,27 +108,8 @@ public class FileText {
         return count;
     }
 
-    public String[][] readCSV(String path) throws IOException {
-        File csv = new File(path);
-        Scanner scanLine = new Scanner(csv);
-        Scanner countLine = new Scanner(csv);
-        String data;
-        int count = 0;
-        while (countLine.hasNextLine()) {
-            count++;
-            countLine.nextLine();
-        }
-        String[][] result = new String[count][];
-        count = 0;
-        while (scanLine.hasNext()) {
-            data = scanLine.nextLine();
-            String[] strings = data.split(",");
-            for (int index = 0; index<strings.length;index++) {
-                strings[index] = strings[index].replaceAll("\"","");
-            }
-            result[count] = strings;
-            count++;
-        }
-        return result;
+    public void copyToFileUseMemory(String pathSource, String pathDest) throws IOException {
+        String data = readFile(pathSource);
+        writeToFile(data,pathDest);
     }
 }
