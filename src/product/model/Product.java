@@ -1,29 +1,32 @@
 package product.model;
 
-public class Product {
-    private String ID;
+import java.io.Serializable;
+
+public class Product implements Serializable,Comparable<Product> {
+    private static final long serialVersionUID = 1L;
+    private String barCode;
     private String name;
     private String brand;
     private int price;
     private String description;
 
-    public Product(String ID, String name, String brand, int price, String description) {
-        this.ID = ID;
+    public Product(String barCode, String name, String brand, int price, String description) {
         this.name = name;
         this.brand = brand;
         this.price = price;
+        this.barCode = barCode;
         this.description = description;
     }
 
     public Product() {
     }
 
-    public String getID() {
-        return ID;
+    public String getBarCode() {
+        return barCode;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setBarCode(String barCode) {
+        this.barCode = barCode;
     }
 
     public String getName() {
@@ -61,10 +64,20 @@ public class Product {
     @Override
     public String toString() {
         return  "Product Info: " + "\n" +
-                "ID: '" + ID + "\n" +
                 "Name: " + name + "\n" +
                 "Brand: " + brand + "\n" +
                 "Price: " + price + "\n" +
+                "Bar Code: '" + barCode + "\n" +
                 "Description: " + description;
+    }
+
+    @Override
+    public int compareTo(Product anotherProduct) {
+        if (this.name.compareTo(anotherProduct.getName()) > 0) {
+            return 1;
+        } else if (this.name.compareTo(anotherProduct.getName()) < 0) {
+            return -1;
+        }
+        return 0;
     }
 }

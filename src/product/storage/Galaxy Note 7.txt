@@ -1,0 +1,6 @@
+Product Info: 
+Name: Galaxy Note 7
+Brand: Samsung
+Price: 15000000
+Bar Code: '98765432104321
+Description: Pink

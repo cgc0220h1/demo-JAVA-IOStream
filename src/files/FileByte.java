@@ -19,6 +19,4 @@ public class FileByte {
         byte[] allBytes = Files.readAllBytes(Paths.get(pathSource));
         Files.write(Paths.get(pathDest),allBytes);
     }
-
-
 }

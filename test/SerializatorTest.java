@@ -1,6 +1,6 @@
-package product.controller;
-
 import org.junit.jupiter.api.Test;
+import product.controller.ProductManager;
+import product.controller.Serializator;
 import product.model.Product;
 
 import java.io.IOException;
@@ -11,7 +11,7 @@ class SerializatorTest {
     void readFromFile() {
         ProductManager productManager;
         Serializator serializator = new Serializator();
-        String pathSource = "test/product/controller/man.dat";
+        String pathSource = "text/Demo";
         try {
             productManager = serializator.readFromFile(pathSource);
             System.out.println(productManager);
@@ -24,7 +24,7 @@ class SerializatorTest {
     void writeToFile() {
         Product product1 = new Product("1309763","iphone","apple",10000000,"sang chanh");
         ProductManager productManager = new ProductManager();
-        productManager.add("1",product1);
+        productManager.add(1,product1);
         String pathDest = "test/product/controller/man.dat";
         Serializator serializator = new Serializator(productManager);
         try {
